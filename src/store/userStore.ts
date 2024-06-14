@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getLoginUser } from "@/api/UserController";
+import { getLoginUser } from "@/api/userController";
 import ACCESS_ENUM from "@/access/accessEnum";
 
 /**

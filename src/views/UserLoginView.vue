@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import API from "@/api";
-import { userLogin } from "@/api/UserController";
+import { userLogin } from "@/api/userController";
 import { useLoginUserStore } from "@/store/userStore";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";

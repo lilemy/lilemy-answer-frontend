@@ -1,14 +1,15 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import UserLayout from "@/layouts/UserLayout.vue";
-import UserRegisterView from "@/views/UserRegisterView.vue";
-import UserLoginView from "@/views/UserLoginView.vue";
-import AdminUserView from "@/views/AdminUserView.vue";
+import UserRegisterView from "@/views/user/UserRegisterView.vue";
+import UserLoginView from "@/views/user/UserLoginView.vue";
+import AdminUserView from "@/views/admin/AdminUserView.vue";
 import ACCESS_ENUM from "@/access/accessEnum";
-import AdminAppView from "@/views/AdminAppView.vue";
-import AdminQuestionView from "@/views/AdminQuestionView.vue";
-import AdminScoringResultView from "@/views/AdminScoringResultView.vue";
-import AdminUserAnswerView from "@/views/AdminUserAnswerView.vue";
+import AdminAppView from "@/views/admin/AdminAppView.vue";
+import AdminQuestionView from "@/views/admin/AdminQuestionView.vue";
+import AdminScoringResultView from "@/views/admin/AdminScoringResultView.vue";
+import AdminUserAnswerView from "@/views/admin/AdminUserAnswerView.vue";
+import AdminView from "@/views/admin/AdminView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -35,6 +36,11 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       hideInMenu: true,
     },
+  },
+  {
+    path: "/admin",
+    name: "管理页",
+    component: AdminView,
   },
   {
     path: "/admin/user",

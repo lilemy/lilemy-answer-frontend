@@ -16,12 +16,32 @@
             <div class="title">小新问答</div>
           </div>
         </a-menu-item>
+        <!--        <a-menu-item
+                  v-for="item in visibleRoutes"
+                  :key="item.path"
+                  style="font-size: 16px"
+                >
+                  {{ item.name }}
+                </a-menu-item>-->
+        <a-menu-item key="/">
+          <template #icon>
+            <icon-home />
+          </template>
+          主页
+        </a-menu-item>
         <a-menu-item
-          v-for="item in visibleRoutes"
-          :key="item.path"
-          style="font-size: 16px"
+          v-if="checkAccess(loginUserStore.loginUser, ACCESS_ENUM.ADMIN)"
+          key="/admin"
         >
-          {{ item.name }}
+          <a-sub-menu>
+            <template #icon>
+              <icon-lock />
+            </template>
+            <template #title>管理页</template>
+            <a-menu-item v-for="item in adminRoutes" :key="item.path">
+              {{ item.name }}
+            </a-menu-item>
+          </a-sub-menu>
         </a-menu-item>
       </a-menu>
     </a-col>
@@ -42,6 +62,8 @@ import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useLoginUserStore } from "@/store/userStore";
 import checkAccess from "@/access/checkAccess";
+import ACCESS_ENUM from "@/access/accessEnum";
+import { IconHome, IconLock } from "@arco-design/web-vue/es/icon";
 
 const loginUserStore = useLoginUserStore();
 
@@ -54,9 +76,12 @@ router.afterEach((to) => {
 });
 
 // 展示在菜单栏的路由数组
-const visibleRoutes = computed(() => {
+const adminRoutes = computed(() => {
   return routes.filter((item) => {
     if (item.meta?.hideInMenu) {
+      return false;
+    }
+    if (item.meta?.access !== ACCESS_ENUM.ADMIN) {
       return false;
     }
     // 根据权限过滤菜单

@@ -21,7 +21,7 @@ const route = useRoute();
  */
 const doInit = () => {
   // 设置全局的标题
-  document.title = "小新回答 AI 答题应用平台";
+  document.title = "小新回答 | AI 答题应用平台";
 };
 
 onMounted(() => {

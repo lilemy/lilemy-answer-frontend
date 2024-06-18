@@ -81,7 +81,7 @@ const loadData = async () => {
 const doSearch = (value: string) => {
   searchParams.value = {
     ...initSearchParams,
-    appName: value,
+    searchText: value,
   };
 };
 

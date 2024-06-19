@@ -40,10 +40,10 @@
       <a-image width="64" :src="record.appIcon" />
     </template>
     <template #appType="{ record }">
-      {{ APP_TYPE_MAP[record.appType] }}
+      {{ record.appType ? "测评类" : "得分类" }}
     </template>
     <template #scoringStrategy="{ record }">
-      {{ APP_SCORING_STRATEGY_MAP[record.scoringStrategy] }}
+      {{ record.scoringStrategy ? "AI" : "自定义" }}
     </template>
     <template #reviewStatus="{ record }">
       {{ REVIEW_STATUS_MAP[record.reviewStatus] }}
@@ -88,12 +88,7 @@ import { deleteApp, doAppReview, listAppByPage } from "@/api/appController";
 import API from "@/api";
 import message from "@arco-design/web-vue/es/message";
 import { dayjs } from "@arco-design/web-vue/es/_utils/date";
-import {
-  APP_SCORING_STRATEGY_MAP,
-  APP_TYPE_MAP,
-  REVIEW_STATUS_ENUM,
-  REVIEW_STATUS_MAP,
-} from "@/constant/app";
+import { REVIEW_STATUS_ENUM, REVIEW_STATUS_MAP } from "@/constant/app";
 
 const formSearchParams = ref<API.AppQueryRequest>({});
 

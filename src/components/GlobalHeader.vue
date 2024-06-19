@@ -35,6 +35,12 @@
           </template>
           创建应用
         </a-menu-item>
+        <a-menu-item key="/answer/my">
+          <template #icon>
+            <icon-calendar />
+          </template>
+          我的答题
+        </a-menu-item>
         <a-menu-item
           v-if="checkAccess(loginUserStore.loginUser, ACCESS_ENUM.ADMIN)"
           key="/admin"
@@ -69,7 +75,12 @@ import { computed, ref } from "vue";
 import { useLoginUserStore } from "@/store/userStore";
 import checkAccess from "@/access/checkAccess";
 import ACCESS_ENUM from "@/access/accessEnum";
-import { IconHome, IconLock, IconEdit } from "@arco-design/web-vue/es/icon";
+import {
+  IconHome,
+  IconLock,
+  IconEdit,
+  IconCalendar,
+} from "@arco-design/web-vue/es/icon";
 
 const loginUserStore = useLoginUserStore();
 

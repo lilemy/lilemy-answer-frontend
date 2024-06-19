@@ -14,6 +14,9 @@ import AppDetailView from "@/views/app/AppDetailView.vue";
 import AppCreateView from "@/views/app/AppCreateView.vue";
 import QuestionCreateView from "@/views/question/QuestionCreateView.vue";
 import ScoringResultCreateView from "@/views/scoringresult/ScoringResultCreateView.vue";
+import DoAnswerView from "@/views/answer/DoAnswerView.vue";
+import AnswerResultView from "@/views/answer/AnswerResultView.vue";
+import MyAnswerView from "@/views/answer/MyAnswerView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -81,6 +84,24 @@ export const routes: Array<RouteRecordRaw> = [
       hideInMenu: true,
     },
   },
+  {
+    path: "/answer/result/:id",
+    name: "答题结果",
+    component: AnswerResultView,
+    props: true,
+    meta: {
+      hideInMenu: true,
+      access: ACCESS_ENUM.USER,
+    },
+  },
+  {
+    path: "/answer/my",
+    name: "我的答题",
+    component: MyAnswerView,
+    meta: {
+      access: ACCESS_ENUM.USER,
+    },
+  },
   // endregion
 
   // region 用户页面路由
@@ -91,6 +112,19 @@ export const routes: Array<RouteRecordRaw> = [
     props: true,
     meta: {
       hideInMenu: true,
+    },
+  },
+  // endregion
+
+  // region 答题页面路由
+  {
+    path: "/answer/do/:appId",
+    name: "答题页面",
+    component: DoAnswerView,
+    props: true,
+    meta: {
+      hideInMenu: true,
+      access: ACCESS_ENUM.USER,
     },
   },
   // endregion

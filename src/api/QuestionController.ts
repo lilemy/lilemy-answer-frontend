@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 /* eslint-disable */
 import request from '@/request';
@@ -6,6 +5,21 @@ import request from '@/request';
 /** 创建题目 POST /question/add */
 export async function addQuestion(body: API.QuestionAddRequest, options?: { [key: string]: any }) {
   return request<API.BaseResponseLong>('/question/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** ai 生成应用题目 POST /question/ai_generate */
+export async function aiGenerateQuestion(
+  body: API.AiGenerateQuestionRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListQuestionContentDTO>('/question/ai_generate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

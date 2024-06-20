@@ -15,12 +15,19 @@
         {{ appData?.appType ? "测评类" : "得分类" }}
       </a-form-item>
       <a-form-item label="题目列表" :content-flex="false" :merge-props="false">
-        <a-button
-          size="medium"
-          @click="addQuestionTopic(questionContent.length)"
-        >
-          底部添加题目
-        </a-button>
+        <a-space size="medium" style="margin-bottom: 30px">
+          <a-button
+            size="medium"
+            @click="addQuestionTopic(questionContent.length)"
+          >
+            底部添加题目
+          </a-button>
+          <!-- AI 生成题目抽屉 -->
+          <AiGenerateQuestionDrawer
+            :appId="appId"
+            :onSuccess="onAiGenerateSuccess"
+          />
+        </a-space>
         <!--遍历题目-->
         <div
           v-for="(question, index) of questionContent"
@@ -130,6 +137,7 @@ import {
 } from "@/api/questionController";
 import { useRouter } from "vue-router";
 import { getAppVoById } from "@/api/appController";
+import AiGenerateQuestionDrawer from "@/views/question/ccomponents/AiGenerateQuestionDrawer.vue";
 
 interface Props {
   appId: string;
@@ -263,6 +271,13 @@ const handleSubmit = async () => {
   } else {
     message.error("操作失败，" + res.data.message);
   }
+};
+/**
+ * AI 生成题目成功后执行
+ */
+const onAiGenerateSuccess = (result: API.QuestionContentDTO[]) => {
+  message.success(`AI 生成题目成功，生成 ${result.length} 道题目`);
+  questionContent.value = [...questionContent.value, ...result];
 };
 </script>
 

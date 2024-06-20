@@ -1,6 +1,7 @@
 <template>
   <div id="appCreateView">
     <h2 style="margin-bottom: 32px">创建应用</h2>
+    <div>{{ form }}</div>
     <a-form
       :model="form"
       :style="{ width: '480px' }"
@@ -86,6 +87,10 @@ const router = useRouter();
  * 提交
  */
 const handleSubmit = async () => {
+  if (form.value.appType === 0 && form.value.scoringStrategy === 1) {
+    message.error("得分类应用暂不支持 AI 评分");
+    return;
+  }
   let res: any;
   // 如果是修改
   if (props.id) {
@@ -100,7 +105,7 @@ const handleSubmit = async () => {
   if (res.data.code === 0) {
     message.success("操作成功，即将跳转到应用详情页");
     setTimeout(() => {
-      router.push(`/app/detail/${props.id ?? res.data.data}`);
+      router.push(`/app/detail/${props.id || res.data.data}`);
     }, 3000);
   } else {
     message.error("操作失败，" + res.data.message);

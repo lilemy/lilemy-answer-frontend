@@ -2,8 +2,8 @@
   <div id="answerResultView">
     <a-card hoverable style="padding: 0 30px">
       <a-row>
-        <a-col flex="auto" class="contentWrapper">
-          <a-descriptions :column="1" size="large">
+        <a-col flex="auto">
+          <a-descriptions :column="1" size="large" class="contentWrapper">
             <h2>{{ data.resultName }}</h2>
             <a-descriptions-item label="结果描述：">
               {{ data.resultDesc }}

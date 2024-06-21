@@ -1,7 +1,6 @@
 <template>
   <div id="appCreateView">
     <h2 style="margin-bottom: 32px">创建应用</h2>
-    <div>{{ form }}</div>
     <a-form
       :model="form"
       :style="{ width: '480px' }"

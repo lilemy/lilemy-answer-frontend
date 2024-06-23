@@ -16,13 +16,6 @@
             <div class="title">小新问答</div>
           </div>
         </a-menu-item>
-        <!--        <a-menu-item
-                  v-for="item in visibleRoutes"
-                  :key="item.path"
-                  style="font-size: 16px"
-                >
-                  {{ item.name }}
-                </a-menu-item>-->
         <a-menu-item key="/">
           <template #icon>
             <icon-home />
@@ -34,12 +27,6 @@
             <icon-edit />
           </template>
           创建应用
-        </a-menu-item>
-        <a-menu-item key="/answer/my">
-          <template #icon>
-            <icon-calendar />
-          </template>
-          我的答题
         </a-menu-item>
         <a-menu-item
           v-if="checkAccess(loginUserStore.loginUser, ACCESS_ENUM.ADMIN)"
@@ -58,12 +45,7 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div v-if="loginUserStore.loginUser.id">
-        {{ loginUserStore.loginUser.userName ?? "无名" }}
-      </div>
-      <div v-else>
-        <a-button type="primary" href="/user/login">登录</a-button>
-      </div>
+      <AvatarHeader />
     </a-col>
   </a-row>
 </template>
@@ -75,12 +57,8 @@ import { computed, ref } from "vue";
 import { useLoginUserStore } from "@/store/userStore";
 import checkAccess from "@/access/checkAccess";
 import ACCESS_ENUM from "@/access/accessEnum";
-import {
-  IconHome,
-  IconLock,
-  IconEdit,
-  IconCalendar,
-} from "@arco-design/web-vue/es/icon";
+import { IconHome, IconLock, IconEdit } from "@arco-design/web-vue/es/icon";
+import AvatarHeader from "@/components/AvatarHeader.vue";
 
 const loginUserStore = useLoginUserStore();
 

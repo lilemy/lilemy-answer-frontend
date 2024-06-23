@@ -1,8 +1,12 @@
 declare namespace API {
-  type AiGenerateQuestionRequest = {
+  type AIGenerateQuestionRequest = {
     appId?: number;
     questionNumber?: number;
     optionNumber?: number;
+  };
+
+  type aiGenerateQuestionSSEParams = {
+    aiGenerateQuestionRequest: AIGenerateQuestionRequest;
   };
 
   type App = {
@@ -28,6 +32,22 @@ declare namespace API {
     appIcon?: string;
     appType?: number;
     scoringStrategy?: number;
+  };
+
+  type AppAnswerCountVO = {
+    appId?: number;
+    answerCount?: number;
+    app?: AppVO;
+  };
+
+  type AppAnswerResultCountVO = {
+    app?: AppVO;
+    resultList?: AppAnswerResultVO[];
+  };
+
+  type AppAnswerResultVO = {
+    resultName?: string;
+    resultCount?: string;
   };
 
   type AppEditRequest = {
@@ -88,6 +108,12 @@ declare namespace API {
     user?: UserVO;
   };
 
+  type BaseResponseAppAnswerResultCountVO = {
+    code?: number;
+    data?: AppAnswerResultCountVO;
+    message?: string;
+  };
+
   type BaseResponseAppVO = {
     code?: number;
     data?: AppVO;
@@ -100,9 +126,15 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseListQuestionContentDTO = {
+  type BaseResponseListAppAnswerCountVO = {
     code?: number;
-    data?: QuestionContentDTO[];
+    data?: AppAnswerCountVO[];
+    message?: string;
+  };
+
+  type BaseResponseListQuestionContentRequest = {
+    code?: number;
+    data?: QuestionContentRequest[];
     message?: string;
   };
 
@@ -216,6 +248,10 @@ declare namespace API {
 
   type DeleteRequest = {
     id?: number;
+  };
+
+  type getAppAnswerResultCountParams = {
+    appId: number;
   };
 
   type getAppVOByIdParams = {
@@ -415,18 +451,18 @@ declare namespace API {
   };
 
   type QuestionAddRequest = {
-    questionContent?: QuestionContentDTO[];
+    questionContent?: QuestionContentRequest[];
     appId?: number;
   };
 
-  type QuestionContentDTO = {
+  type QuestionContentRequest = {
     title?: string;
     options?: Option[];
   };
 
   type QuestionEditRequest = {
     id?: number;
-    questionContent?: QuestionContentDTO[];
+    questionContent?: QuestionContentRequest[];
   };
 
   type QuestionQueryRequest = {
@@ -443,12 +479,12 @@ declare namespace API {
 
   type QuestionUpdateRequest = {
     id?: number;
-    questionContent?: QuestionContentDTO[];
+    questionContent?: QuestionContentRequest[];
   };
 
   type QuestionVO = {
     id?: number;
-    questionContent?: QuestionContentDTO[];
+    questionContent?: QuestionContentRequest[];
     appId?: number;
     userId?: number;
     createTime?: string;
@@ -534,6 +570,10 @@ declare namespace API {
     user?: UserVO;
   };
 
+  type SseEmitter = {
+    timeout?: number;
+  };
+
   type uploadFileParams = {
     uploadFileRequest: UploadFileRequest;
   };
@@ -582,6 +622,7 @@ declare namespace API {
   };
 
   type UserAnswerAddRequest = {
+    id?: number;
     appId?: number;
     choices?: string[];
   };

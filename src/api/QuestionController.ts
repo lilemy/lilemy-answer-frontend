@@ -16,15 +16,32 @@ export async function addQuestion(body: API.QuestionAddRequest, options?: { [key
 
 /** ai 生成应用题目 POST /question/ai_generate */
 export async function aiGenerateQuestion(
-  body: API.AiGenerateQuestionRequest,
+  body: API.AIGenerateQuestionRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseListQuestionContentDTO>('/question/ai_generate', {
+  return request<API.BaseResponseListQuestionContentRequest>('/question/ai_generate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     data: body,
+    ...(options || {}),
+  });
+}
+
+/** ai 生成应用题目（实时） GET /question/ai_generate/see */
+export async function aiGenerateQuestionSse(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.aiGenerateQuestionSSEParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.SseEmitter>('/question/ai_generate/see', {
+    method: 'GET',
+    params: {
+      ...params,
+      aiGenerateQuestionRequest: undefined,
+      ...params['aiGenerateQuestionRequest'],
+    },
     ...(options || {}),
   });
 }

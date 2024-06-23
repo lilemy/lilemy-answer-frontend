@@ -41,8 +41,14 @@
               {{ dayjs(data.createTime).format("YYYY-MM-DD HH:mm:ss") }}
             </a-descriptions-item>
             <a-space size="medium">
-              <a-button type="primary" :href="`/answer/do/${data.appId}`">
-                去答题
+              <a-button type="primary" @click="doShare"> 分享结果</a-button>
+              <a-button :href="`/answer/do/${data.appId}`"> 去答题</a-button>
+              <a-button
+                :v-if="data.userId == loginUserStore.loginUser.id"
+                type="outline"
+                href="/answer/my"
+              >
+                查看我的答题
               </a-button>
             </a-space>
           </a-descriptions>
@@ -57,6 +63,7 @@
       </a-row>
     </a-card>
   </div>
+  <ShareModal :link="shareLink" title="应用分享" ref="shareModalRef" />
 </template>
 
 <script setup lang="ts">
@@ -66,6 +73,8 @@ import message from "@arco-design/web-vue/es/message";
 import { getUserAnswerVoById } from "@/api/userAnswerController";
 import { getAppVoById } from "@/api/appController";
 import dayjs from "dayjs";
+import ShareModal from "@/components/ShareModal.vue";
+import { useLoginUserStore } from "@/store/userStore";
 
 interface Props {
   id: string;
@@ -79,6 +88,20 @@ const props = withDefaults(defineProps<Props>(), {
 
 const app = ref<API.AppVO>({});
 const data = ref<API.UserAnswerVO>({});
+const loginUserStore = useLoginUserStore();
+
+// 分享弹窗的引用
+const shareModalRef = ref();
+
+// 分享链接
+const shareLink = ref<string>(`${window.location.href}`);
+
+// 分享
+const doShare = () => {
+  if (shareModalRef.value) {
+    shareModalRef.value.openModal();
+  }
+};
 
 /**
  * 加载数据

@@ -62,6 +62,9 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/create/app",
     name: "创建应用",
     component: AppCreateView,
+    meta: {
+      access: ACCESS_ENUM.USER,
+    },
   },
   {
     path: "/create/app/:id",
@@ -99,6 +102,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "我的答题",
     component: MyAnswerView,
     meta: {
+      hideInMenu: true,
       access: ACCESS_ENUM.USER,
     },
   },

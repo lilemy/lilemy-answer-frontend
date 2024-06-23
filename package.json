@@ -15,8 +15,11 @@
     "axios": "^1.7.2",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.11",
+    "echarts": "^5.5.0",
     "pinia": "^2.1.7",
+    "qrcode": "^1.5.3",
     "vue": "^3.2.13",
+    "vue-echarts": "^6.7.3",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {

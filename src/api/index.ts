@@ -8,6 +8,7 @@ import * as scoringResultController from './scoringResultController';
 import * as questionController from './questionController';
 import * as fileController from './fileController';
 import * as appController from './appController';
+import * as statisticController from './statisticController';
 export default {
   userAnswerController,
   userController,
@@ -15,4 +16,5 @@ export default {
   questionController,
   fileController,
   appController,
+  statisticController,
 };

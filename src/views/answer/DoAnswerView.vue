@@ -58,7 +58,10 @@ import API from "@/api";
 import message from "@arco-design/web-vue/es/message";
 import { listQuestionVoByPage } from "@/api/questionController";
 import { getAppVoById } from "@/api/appController";
-import { addUserAnswer } from "@/api/userAnswerController";
+import {
+  addUserAnswer,
+  generateUserAnswerId,
+} from "@/api/userAnswerController";
 
 interface Props {
   appId: string;
@@ -74,12 +77,12 @@ const router = useRouter();
 
 const app = ref<API.AppVO>({});
 // 题目内容结构（理解为题目列表）
-const questionContent = ref<API.QuestionContentDTO[]>([]);
+const questionContent = ref<API.QuestionContentRequest[]>([]);
 
 // 当前题目的序号（从 1 开始）
 const current = ref(1);
 // 当前题目
-const currentQuestion = ref<API.QuestionContentDTO>({});
+const currentQuestion = ref<API.QuestionContentRequest>({});
 // 当前题目选项
 const questionOptions = computed(() => {
   return currentQuestion.value?.options
@@ -113,15 +116,34 @@ const doRadioChange = (value: string) => {
   answerList[current.value - 1] = value;
 };
 
+// 唯一 id
+const id = ref<number>();
+
+// 生成唯一 id
+const generateId = async () => {
+  const res = await generateUserAnswerId();
+  if (res.data.code === 0) {
+    id.value = res.data.data as any;
+  } else {
+    message.error("获取唯一 id 失败，" + res.data.message);
+  }
+};
+
+// 进入页面时，生成唯一 id
+watchEffect(() => {
+  generateId();
+});
+
 /**
  * 提交
  */
 const doSubmit = async () => {
-  if (!props.appId || !answerList) {
+  if (!props.appId || !answerList || !id.value) {
     return;
   }
   submitting.value = true;
   const res = await addUserAnswer({
+    id: id.value,
     appId: props.appId as any,
     choices: answerList,
   });

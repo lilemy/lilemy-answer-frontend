@@ -26,24 +26,32 @@
             创建时间：{{ dayjs(data.createTime).format("YYYY-MM-DD HH:mm:ss") }}
           </p>
           <a-space>
-            <a-button
-              type="primary"
-              status="success"
-              :href="`/answer/do/${id}`"
-            >
+            <a-button type="primary" :href="`/answer/do/${id}`">
               开始答题
             </a-button>
-            <a-button>分享应用</a-button>
-            <a-button v-if="isMyApp" :href="`/create/question/${id}`">
+            <a-button @click="doShare" type="primary" status="success">
+              分享应用
+            </a-button>
+            <a-button
+              v-if="isMyApp"
+              type="outline"
+              :href="`/create/question/${id}`"
+            >
               设置题目
             </a-button>
-            <a-button v-if="isMyApp" :href="`/create/scoring_result/${id}`">
+            <a-button
+              v-if="isMyApp"
+              type="outline"
+              :href="`/create/scoring_result/${id}`"
+            >
               设置评分
             </a-button>
-            <a-button v-if="isMyApp" :href="`/create/app/${id}`">
+            <a-button v-if="isMyApp" type="outline" :href="`/create/app/${id}`">
               修改应用
             </a-button>
-            <a-button v-if="isMyApp" status="danger"> 删除应用</a-button>
+            <a-button v-if="isMyApp" type="primary" status="danger">
+              删除应用
+            </a-button>
           </a-space>
         </a-col>
         <a-col flex="320px">
@@ -52,6 +60,7 @@
       </a-row>
     </a-card>
   </div>
+  <ShareModal :link="shareLink" title="应用分享" ref="shareModalRef" />
 </template>
 
 <script setup lang="ts">
@@ -62,6 +71,7 @@ import message from "@arco-design/web-vue/es/message";
 import { APP_SCORING_STRATEGY_MAP, APP_TYPE_MAP } from "@/constant/app";
 import dayjs from "dayjs";
 import { useLoginUserStore } from "@/store/userStore";
+import ShareModal from "@/components/ShareModal.vue";
 
 const data = ref<API.AppVO>({});
 
@@ -96,6 +106,21 @@ const loadData = async () => {
   } else {
     message.error("获取数据失败：" + res.data.message);
   }
+};
+
+// 分享弹窗的引用
+const shareModalRef = ref();
+
+// 分享链接
+const shareLink = `${window.location.protocol}//${window.location.host}/app/detail/${props.id}`;
+
+// 分享
+const doShare = (e: Event) => {
+  if (shareModalRef.value) {
+    shareModalRef.value.openModal();
+  }
+  // 阻止冒泡，防止跳转到详情页
+  e.stopPropagation();
 };
 
 /**

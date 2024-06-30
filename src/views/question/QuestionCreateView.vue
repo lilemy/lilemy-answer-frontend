@@ -152,7 +152,7 @@ const props = withDefaults(defineProps<Props>(), {
   },
 });
 
-const questionContent = ref<API.QuestionContentDTO[]>([]);
+const questionContent = ref<API.QuestionContentRequest[]>([]);
 const appData = ref<API.AppVO>();
 
 const router = useRouter();
@@ -183,7 +183,10 @@ const deleteQuestionTopic = (index: number) => {
  * @param question
  * @param index
  */
-const addQuestionOption = (question: API.QuestionContentDTO, index: number) => {
+const addQuestionOption = (
+  question: API.QuestionContentRequest,
+  index: number
+) => {
   if (!question.options) {
     question.options = [];
   }
@@ -199,7 +202,7 @@ const addQuestionOption = (question: API.QuestionContentDTO, index: number) => {
  * @param index
  */
 const deleteQuestionOption = (
-  question: API.QuestionContentDTO,
+  question: API.QuestionContentRequest,
   index: number
 ) => {
   if (!question.options) {
@@ -278,14 +281,14 @@ const handleSubmit = async () => {
 /**
  * AI 生成题目成功后执行
  */
-const onAiGenerateSuccess = (result: API.QuestionContentDTO[]) => {
+const onAiGenerateSuccess = (result: API.QuestionContentRequest[]) => {
   message.success(`AI 生成题目成功，生成 ${result.length} 道题目`);
   questionContent.value = [...questionContent.value, ...result];
 };
 /**
  * AI 生成题目成功后执行（SSE）
  */
-const onAiGenerateSuccessSSE = (result: API.QuestionContentDTO) => {
+const onAiGenerateSuccessSSE = (result: API.QuestionContentRequest) => {
   questionContent.value = [...questionContent.value, result];
 };
 

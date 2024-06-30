@@ -25,7 +25,7 @@
           <p>
             创建时间：{{ dayjs(data.createTime).format("YYYY-MM-DD HH:mm:ss") }}
           </p>
-          <a-space>
+          <a-space style="margin-bottom: 20px" wrap>
             <a-button type="primary" :href="`/answer/do/${id}`">
               开始答题
             </a-button>

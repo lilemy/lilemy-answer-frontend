@@ -66,8 +66,8 @@ import message from "@arco-design/web-vue/es/message";
 
 interface Props {
   appId: string;
-  onSuccess?: (result: API.QuestionContentDTO[]) => void;
-  onSSESuccess?: (result: API.QuestionContentDTO) => void;
+  onSuccess?: (result: API.QuestionContentRequest[]) => void;
+  onSSESuccess?: (result: API.QuestionContentRequest) => void;
   onSSEStart?: (event: any) => void;
   onSSEClose?: (event: any) => void;
 }
@@ -81,7 +81,7 @@ const props = withDefaults(defineProps<Props>(), {
 const form = reactive({
   optionNumber: 2,
   questionNumber: 10,
-} as API.AiGenerateQuestionRequest);
+} as API.AIGenerateQuestionRequest);
 
 const visible = ref(false);
 const submitting = ref(false);
@@ -123,6 +123,12 @@ const handleSubmit = async () => {
   }
 };
 
+// 是否是开发环境
+const isDev = process.env.NODE_ENV === "development";
+
+const baseUrl = isDev
+  ? "http://localhost:9126/api"
+  : "https://answerapi.lilemy.cn/api";
 /**
  * 实时生成
  */
@@ -133,7 +139,8 @@ const handleSSESubmit = async () => {
   }
   // 创建 SSE 请求
   const eventSource = new EventSource(
-    "http://localhost:9126/api/question/ai_generate/see" +
+    baseUrl +
+      "/question/ai_generate/see" +
       `?appId=${props.appId}&optionNumber=${form.optionNumber}&questionNumber=${form.questionNumber}`
   );
   let first = true;

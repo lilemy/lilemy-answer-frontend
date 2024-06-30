@@ -17,6 +17,7 @@ import ScoringResultCreateView from "@/views/scoringresult/ScoringResultCreateVi
 import DoAnswerView from "@/views/answer/DoAnswerView.vue";
 import AnswerResultView from "@/views/answer/AnswerResultView.vue";
 import MyAnswerView from "@/views/answer/MyAnswerView.vue";
+import MyAppView from "@/views/app/MyAppView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -73,6 +74,15 @@ export const routes: Array<RouteRecordRaw> = [
     props: true,
     meta: {
       hideInMenu: true,
+    },
+  },
+  {
+    path: "/app/my",
+    name: "我的应用",
+    component: MyAppView,
+    meta: {
+      hideInMenu: true,
+      access: ACCESS_ENUM.USER,
     },
   },
   // endregion

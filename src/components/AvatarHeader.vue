@@ -11,6 +11,12 @@
             {{ loginUserStore.loginUser.userName ?? "无名" }}
           </a-button>
           <template #content>
+            <a-doption @click="router.push('/app/my')">
+              <template #icon>
+                <icon-edit />
+              </template>
+              我的应用
+            </a-doption>
             <a-doption @click="router.push('/answer/my')">
               <template #icon>
                 <icon-edit />

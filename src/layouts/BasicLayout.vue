@@ -8,16 +8,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://github.com/lilemy" target="_blank">
-          <div class="footer-item" style="margin-bottom: 5px">
-            <img style="height: 15px" src="../assets/github.png" alt="" />
-            <div>GitHub</div>
-          </div>
-        </a>
-        <div class="footer-item">
-          <img src="../assets/copyright.svg" style="height: 15px" alt="" />
-          <div>2024 小新</div>
-        </div>
+        <global-footer />
       </a-layout-footer>
     </a-layout>
   </div>
@@ -25,6 +16,7 @@
 
 <script setup lang="ts">
 import GlobalHeader from "@/components/GlobalHeader.vue";
+import GlobalFooter from "@/components/GlobalFooter.vue";
 </script>
 
 <style scoped>

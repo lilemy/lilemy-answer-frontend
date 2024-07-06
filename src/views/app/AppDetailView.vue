@@ -5,8 +5,11 @@
         <a-col flex="auto" class="content-wrapper">
           <h2>{{ data.appName }}</h2>
           <p>{{ data.appDesc }}</p>
-          <p>应用类型：{{ APP_TYPE_MAP[data.appType] }}</p>
-          <p>评分策略：{{ APP_SCORING_STRATEGY_MAP[data.scoringStrategy] }}</p>
+          <p>应用类型：{{ APP_TYPE_MAP[Number(data.appType)] }}</p>
+          <p>
+            评分策略：
+            {{ APP_SCORING_STRATEGY_MAP[Number(data.scoringStrategy)] }}
+          </p>
           <p>
             <a-space>
               作者：

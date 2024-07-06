@@ -7,13 +7,14 @@
             <a-avatar
               :image-url="loginUserStore.loginUser.userAvatar"
               style="margin-right: 10px"
+              :size="30"
             />
             {{ loginUserStore.loginUser.userName ?? "无名" }}
           </a-button>
           <template #content>
             <a-doption @click="router.push('/app/my')">
               <template #icon>
-                <icon-edit />
+                <icon-file />
               </template>
               我的应用
             </a-doption>
@@ -44,7 +45,7 @@ import { useLoginUserStore } from "@/store/userStore";
 import { userLogout } from "@/api/userController";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
-import { IconEdit, IconExport } from "@arco-design/web-vue/es/icon";
+import { IconEdit, IconExport, IconFile } from "@arco-design/web-vue/es/icon";
 
 const loginUserStore = useLoginUserStore();
 

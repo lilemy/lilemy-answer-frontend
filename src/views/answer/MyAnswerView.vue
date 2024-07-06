@@ -6,24 +6,24 @@
       layout="inline"
       @submit="doSearch"
     >
-      <a-form-item field="resultName" label="结果名称">
+      <a-form-item field="resultName" label="结果名称：">
         <a-input
           v-model="formSearchParams.resultName"
-          placeholder="请输入结果名称"
+          placeholder="请输入结果名称："
           allow-clear
         />
       </a-form-item>
-      <a-form-item field="resultDesc" label="结果描述">
+      <a-form-item field="resultDesc" label="结果描述：">
         <a-input
           v-model="formSearchParams.resultDesc"
-          placeholder="请输入结果描述"
+          placeholder="请输入结果描述："
           allow-clear
         />
       </a-form-item>
-      <a-form-item field="appId" label="应用 id">
+      <a-form-item field="appId" label="应用 id：">
         <a-input
           v-model="formSearchParams.appId"
-          placeholder="请输入应用 id"
+          placeholder="请输入应用 id："
           allow-clear
         />
       </a-form-item>
@@ -44,15 +44,17 @@
       total,
     }"
     @page-change="onPageChange"
+    :scroll="scroll"
+    :sticky-header="true"
   >
     <template #resultPicture="{ record }">
       <a-image width="64" :src="record.resultPicture" />
     </template>
     <template #appType="{ record }">
-      {{ record.appType ? "测评类" : "得分类" }}
+      {{ APP_TYPE_MAP[record.appType] }}
     </template>
     <template #scoringStrategy="{ record }">
-      {{ record.scoringStrategy ? "AI" : "自定义" }}
+      {{ APP_SCORING_STRATEGY_MAP[record.scoringStrategy] }}
     </template>
     <template #createTime="{ record }">
       {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
@@ -80,6 +82,11 @@ import {
 import API from "@/api";
 import message from "@arco-design/web-vue/es/message";
 import { dayjs } from "@arco-design/web-vue/es/_utils/date";
+import { APP_SCORING_STRATEGY_MAP, APP_TYPE_MAP } from "@/constant/app";
+
+const scroll = {
+  x: "150%",
+};
 
 const formSearchParams = ref<API.UserAnswerQueryRequest>({});
 
@@ -159,46 +166,58 @@ const columns = [
   {
     title: "选项",
     dataIndex: "choices",
+    width: 150,
+    minWidth: 80,
   },
   {
     title: "名称",
     dataIndex: "resultName",
+    width: 150,
+    minWidth: 80,
   },
   {
     title: "描述",
     dataIndex: "resultDesc",
+    width: 700,
   },
   {
     title: "图片",
     dataIndex: "resultPicture",
     slotName: "resultPicture",
+    width: 80,
   },
   {
     title: "得分",
     dataIndex: "resultScore",
+    width: 100,
   },
   {
     title: "应用 id",
     dataIndex: "appId",
+    width: 200,
   },
   {
     title: "应用类型",
     dataIndex: "appType",
     slotName: "appType",
+    width: 100,
   },
   {
     title: "评分策略",
     dataIndex: "scoringStrategy",
     slotName: "scoringStrategy",
+    width: 100,
   },
   {
     title: "创建时间",
     dataIndex: "createTime",
     slotName: "createTime",
+    width: 150,
   },
   {
     title: "操作",
     slotName: "optional",
+    width: 200,
   },
 ];
 </script>

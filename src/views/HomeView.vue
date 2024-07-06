@@ -2,7 +2,7 @@
   <div id="homeView">
     <div class="searchBar">
       <a-input-search
-        :style="{ width: '380px' }"
+        :style="{ width: '320px' }"
         placeholder="搜索答题应用"
         size="large"
         search-button

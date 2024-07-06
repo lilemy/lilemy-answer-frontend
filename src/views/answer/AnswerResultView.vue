@@ -1,6 +1,6 @@
 <template>
   <div id="answerResultView">
-    <a-card hoverable style="padding: 0 30px">
+    <a-card hoverable style="padding: 0 30px; width: 100%">
       <a-row>
         <a-col flex="auto">
           <a-descriptions :column="1" size="large" class="contentWrapper">
@@ -18,10 +18,10 @@
               {{ app.appName }}
             </a-descriptions-item>
             <a-descriptions-item label="应用类型：">
-              {{ app.appType ? "测评类" : "得分类" }}
+              {{ APP_TYPE_MAP[Number(app.appType)] }}
             </a-descriptions-item>
             <a-descriptions-item label="评分策略：">
-              {{ app.scoringStrategy ? "AI" : "自定义" }}
+              {{ APP_SCORING_STRATEGY_MAP[Number(app.scoringStrategy)] }}
             </a-descriptions-item>
             <a-descriptions-item label="答题人：">
               <a-space>
@@ -40,17 +40,19 @@
             <a-descriptions-item label="答题时间">
               {{ dayjs(data.createTime).format("YYYY-MM-DD HH:mm:ss") }}
             </a-descriptions-item>
-            <a-space size="medium">
-              <a-button type="primary" @click="doShare"> 分享结果</a-button>
-              <a-button :href="`/answer/do/${data.appId}`"> 去答题</a-button>
-              <a-button
-                :v-if="data.userId == loginUserStore.loginUser.id"
-                type="outline"
-                href="/answer/my"
-              >
-                查看我的答题
-              </a-button>
-            </a-space>
+            <a-descriptions-item>
+              <a-space size="medium" wrap>
+                <a-button type="primary" @click="doShare"> 分享结果</a-button>
+                <a-button :href="`/answer/do/${data.appId}`"> 去答题</a-button>
+                <a-button
+                  :v-if="data.userId == loginUserStore.loginUser.id"
+                  type="outline"
+                  href="/answer/my"
+                >
+                  查看我的答题
+                </a-button>
+              </a-space>
+            </a-descriptions-item>
           </a-descriptions>
         </a-col>
         <a-col flex="320px">
@@ -75,6 +77,7 @@ import { getAppVoById } from "@/api/appController";
 import dayjs from "dayjs";
 import ShareModal from "@/components/ShareModal.vue";
 import { useLoginUserStore } from "@/store/userStore";
+import { APP_SCORING_STRATEGY_MAP, APP_TYPE_MAP } from "@/constant/app";
 
 interface Props {
   id: string;

@@ -13,7 +13,7 @@
     >
       <template #item="{ item }">
         <a-card style="margin-bottom: 30px">
-          <a-row style="margin-bottom: 16px">
+          <a-row>
             <a-col flex="auto" class="content-wrapper">
               <h2>{{ item.appName }}</h2>
               <a-descriptions
@@ -65,7 +65,7 @@
               </a-space>
             </a-col>
             <a-col flex="320px">
-              <a-image width="100%" :src="item.appIcon" />
+              <a-image width="98%" :src="item.appIcon" />
             </a-col>
           </a-row>
         </a-card>
@@ -151,9 +151,5 @@ watchEffect(() => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 28px;
-}
-
-.list-demo-action-layout .image-area img {
-  width: 100%;
 }
 </style>

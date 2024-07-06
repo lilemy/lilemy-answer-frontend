@@ -6,7 +6,7 @@
         {{ appData?.appName }}
       </a-descriptions-item>
       <a-descriptions-item label="应用类型：">
-        {{ appData?.appType ? "测评类" : "得分类" }}
+        {{ APP_TYPE_MAP[Number(appData?.appType)] }}
       </a-descriptions-item>
     </a-descriptions>
     <a-table
@@ -41,16 +41,16 @@
       @submit="handleSubmit"
     >
       <h2>设置评分</h2>
-      <a-form-item v-if="updateId" label="修改评分 id">
+      <a-form-item v-if="updateId" label="评分 id：">
         {{ updateId }}
       </a-form-item>
-      <a-form-item field="resultName" label="结果名称">
+      <a-form-item field="resultName" label="结果名称：">
         <a-input v-model="form.resultName" placeholder="请输入结果名称" />
       </a-form-item>
-      <a-form-item field="resultDesc" label="结果描述">
+      <a-form-item field="resultDesc" label="结果描述：">
         <a-input v-model="form.resultDesc" placeholder="请输入结果描述" />
       </a-form-item>
-      <a-form-item field="resultPicture" label="结果图标">
+      <a-form-item field="resultPicture" label="结果图标：">
         <a-input
           v-model="form.resultPicture"
           placeholder="请输入结果图标地址"
@@ -59,7 +59,7 @@
       <a-form-item
         v-if="appData?.appType === 1"
         field="resultProp"
-        label="结果集"
+        label="结果集："
       >
         <a-input-tag
           v-model="form.resultProp"
@@ -71,7 +71,7 @@
       <a-form-item
         v-if="appData?.appType === 0"
         field="resultScoreRange"
-        label="结果得分范围"
+        label="结果得分范围："
       >
         <a-input-number
           v-model="form.resultScoreRange"
@@ -99,6 +99,7 @@ import {
 import message from "@arco-design/web-vue/es/message";
 import { getAppVoById } from "@/api/appController";
 import dayjs from "dayjs";
+import { APP_TYPE_MAP } from "@/constant/app";
 
 interface Props {
   appId: string;
@@ -118,8 +119,6 @@ const form = ref({
   resultName: "",
   resultPicture: "",
 } as API.ScoringResultAddRequest);
-
-const formSearchParams = ref<API.ScoringResultQueryRequest>({});
 
 // 初始化搜索条件（不应该被修改）
 const initSearchParams = {
@@ -160,7 +159,7 @@ const doDelete = async (record: API.ScoringResult) => {
     id: record.id,
   });
   if (res.data.code === 0) {
-    loadData();
+    await loadData();
   } else {
     message.error("删除失败，" + res.data.message);
   }
@@ -177,6 +176,9 @@ const onPageChange = (page: number) => {
   };
 };
 
+/**
+ * 加载数据
+ */
 const loadData = async () => {
   if (!props.appId) {
     return;
@@ -186,8 +188,8 @@ const loadData = async () => {
     ...searchParams.value,
   };
   const res = await listScoringResultVoByPage(params);
-  if (res.data.code === 0) {
-    dataList.value = res.data.data?.records || [];
+  if (res.data.code === 0 && res.data.data?.records) {
+    dataList.value = res.data.data?.records;
     total.value = res.data.data?.total || 0;
   } else {
     message.error("获取数据失败，" + res.data.message);
@@ -232,11 +234,14 @@ const handleSubmit = async () => {
     tableRef.value.loadData();
     updateId.value = undefined;
   }
+  await loadData();
 };
+
 // 获取旧数据
 watchEffect(() => {
   loadData();
 });
+
 // 表格列配置
 const columns = [
   {

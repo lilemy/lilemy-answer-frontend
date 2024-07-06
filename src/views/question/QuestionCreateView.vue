@@ -12,7 +12,7 @@
         {{ appData?.appName }}
       </a-form-item>
       <a-form-item label="应用类型">
-        {{ appData?.appType ? "测评类" : "得分类" }}
+        {{ APP_TYPE_MAP[Number(appData?.appType)] }}
       </a-form-item>
       <a-form-item label="题目列表" :content-flex="false" :merge-props="false">
         <a-space size="medium" style="margin-bottom: 30px">
@@ -141,6 +141,7 @@ import {
 import { useRouter } from "vue-router";
 import { getAppVoById } from "@/api/appController";
 import AiGenerateQuestionDrawer from "@/views/question/ccomponents/AIGenerateQuestionDrawer.vue";
+import { APP_TYPE_MAP } from "../../constant/app";
 
 interface Props {
   appId: string;

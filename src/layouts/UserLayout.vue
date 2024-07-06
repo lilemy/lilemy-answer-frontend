@@ -37,23 +37,12 @@ import GlobalFooter from "@/components/GlobalFooter.vue";
 }
 
 #userLayout .content {
-  margin-bottom: 16px;
   padding: 20px;
 }
 
-.footer {
+#userLayout .footer {
   margin: 0 auto;
   padding: 16px;
   text-align: center;
-}
-
-.footer-item {
-  display: flex;
-  align-items: center;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 </style>

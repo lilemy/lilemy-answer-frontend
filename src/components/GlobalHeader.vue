@@ -1,5 +1,5 @@
 <template>
-  <a-row id="globalHeader" align="center" :wrap="false">
+  <a-row align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -8,7 +8,7 @@
       >
         <a-menu-item
           key="0"
-          :style="{ padding: 0, marginRight: '38px' }"
+          :style="{ margin: 0, padding: 0, marginRight: '38px' }"
           disabled
         >
           <div class="titleBar">
@@ -105,6 +105,6 @@ const doMenuClick = (key: string) => {
 }
 
 .logo {
-  height: 40px;
+  height: 35px;
 }
 </style>

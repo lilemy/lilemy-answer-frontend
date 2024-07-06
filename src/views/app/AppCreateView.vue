@@ -3,19 +3,35 @@
     <h2 style="margin-bottom: 32px">创建应用</h2>
     <a-form
       :model="form"
-      :style="{ width: '480px' }"
+      :style="{ minWidth: '320px' }"
       label-align="left"
       auto-label-width
       @submit="handleSubmit"
     >
       <a-form-item field="appName" label="应用名称：">
-        <a-input v-model="form.appName" placeholder="请输入应用名称" />
+        <a-input
+          :style="{ width: '480px' }"
+          v-model="form.appName"
+          placeholder="请输入应用名称"
+        />
       </a-form-item>
       <a-form-item field="appDesc" label="应用描述：">
-        <a-input v-model="form.appDesc" placeholder="请输入应用描述" />
+        <a-textarea
+          :style="{ width: '480px' }"
+          v-model="form.appDesc"
+          placeholder="请输入应用描述"
+          :auto-size="{
+            minRows: 1,
+            maxRows: 20,
+          }"
+        />
       </a-form-item>
       <a-form-item field="appIcon" label="应用图标：">
-        <a-input v-model="form.appIcon" placeholder="请输入应用图标" />
+        <a-input
+          :style="{ width: '480px' }"
+          v-model="form.appIcon"
+          placeholder="请输入应用图标"
+        />
       </a-form-item>
       <a-form-item field="appType" label="应用类型：">
         <a-select

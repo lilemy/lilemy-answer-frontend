@@ -36,14 +36,4 @@ import GlobalFooter from "@/components/GlobalFooter.vue";
   padding: 10px;
   text-align: center;
 }
-
-.footer-item {
-  display: flex;
-  align-items: center;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
 </style>

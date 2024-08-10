@@ -18,6 +18,8 @@ import DoAnswerView from "@/views/answer/DoAnswerView.vue";
 import AnswerResultView from "@/views/answer/AnswerResultView.vue";
 import MyAnswerView from "@/views/answer/MyAnswerView.vue";
 import MyAppView from "@/views/app/MyAppView.vue";
+import UserInfoView from "@/views/user/UserInfoView.vue";
+import UserEditView from "@/views/user/UserEditView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -44,6 +46,24 @@ export const routes: Array<RouteRecordRaw> = [
       },
     ],
     meta: {
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/my/info",
+    name: "个人中心",
+    component: UserInfoView,
+    meta: {
+      access: ACCESS_ENUM.USER,
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/my/edit",
+    name: "信息修改",
+    component: UserEditView,
+    meta: {
+      access: ACCESS_ENUM.USER,
       hideInMenu: true,
     },
   },

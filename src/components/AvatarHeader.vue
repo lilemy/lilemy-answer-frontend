@@ -12,6 +12,12 @@
             {{ loginUserStore.loginUser.userName ?? "无名" }}
           </a-button>
           <template #content>
+            <a-doption @click="router.push('/my/info')">
+              <template #icon>
+                <icon-user />
+              </template>
+              个人中心
+            </a-doption>
             <a-doption @click="router.push('/app/my')">
               <template #icon>
                 <icon-file />
@@ -45,7 +51,12 @@ import { useLoginUserStore } from "@/store/userStore";
 import { userLogout } from "@/api/userController";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
-import { IconEdit, IconExport, IconFile } from "@arco-design/web-vue/es/icon";
+import {
+  IconEdit,
+  IconExport,
+  IconFile,
+  IconUser,
+} from "@arco-design/web-vue/es/icon";
 
 const loginUserStore = useLoginUserStore();
 

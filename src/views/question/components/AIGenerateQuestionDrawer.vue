@@ -1,6 +1,9 @@
 <template>
   <div id="aiGenerateQuestionDrawer">
-    <a-button type="outline" @click="handleClick">AI 生成题目</a-button>
+    <!--  没token暂时关闭  -->
+    <a-button type="outline" @click="handleClick" disabled>
+      AI 生成题目
+    </a-button>
     <a-drawer
       :width="340"
       :visible="visible"

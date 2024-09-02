@@ -140,8 +140,8 @@ import {
 } from "@/api/questionController";
 import { useRouter } from "vue-router";
 import { getAppVoById } from "@/api/appController";
-import AiGenerateQuestionDrawer from "@/views/question/ccomponents/AIGenerateQuestionDrawer.vue";
-import { APP_TYPE_MAP } from "../../constant/app";
+import AiGenerateQuestionDrawer from "@/views/question/components/AIGenerateQuestionDrawer.vue";
+import { APP_TYPE_MAP } from "@/constant/app";
 
 interface Props {
   appId: string;

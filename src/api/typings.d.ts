@@ -690,7 +690,6 @@ declare namespace API {
 
   type UserUpdateMyRequest = {
     userName?: string;
-    userAvatar?: string;
     userProfile?: string;
   };
 

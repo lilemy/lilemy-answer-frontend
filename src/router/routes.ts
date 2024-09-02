@@ -16,10 +16,10 @@ import QuestionCreateView from "@/views/question/QuestionCreateView.vue";
 import ScoringResultCreateView from "@/views/scoringresult/ScoringResultCreateView.vue";
 import DoAnswerView from "@/views/answer/DoAnswerView.vue";
 import AnswerResultView from "@/views/answer/AnswerResultView.vue";
-import MyAnswerView from "@/views/answer/MyAnswerView.vue";
-import MyAppView from "@/views/app/MyAppView.vue";
+import MyAnswerView from "@/views/user/components/MyAnswerView.vue";
+import MyAppView from "@/views/user/components/MyAppView.vue";
 import UserInfoView from "@/views/user/UserInfoView.vue";
-import UserEditView from "@/views/user/UserEditView.vue";
+import UserEditView from "@/views/user/UserSettingView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {

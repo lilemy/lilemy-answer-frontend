@@ -18,17 +18,11 @@
               </template>
               个人中心
             </a-doption>
-            <a-doption @click="router.push('/app/my')">
-              <template #icon>
-                <icon-file />
-              </template>
-              我的应用
-            </a-doption>
-            <a-doption @click="router.push('/answer/my')">
+            <a-doption @click="router.push('/my/edit')">
               <template #icon>
                 <icon-edit />
               </template>
-              我的答题
+              个人设置
             </a-doption>
             <a-doption @click="logout">
               <template #icon>
@@ -51,12 +45,7 @@ import { useLoginUserStore } from "@/store/userStore";
 import { userLogout } from "@/api/userController";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
-import {
-  IconEdit,
-  IconExport,
-  IconFile,
-  IconUser,
-} from "@arco-design/web-vue/es/icon";
+import { IconEdit, IconExport, IconUser } from "@arco-design/web-vue/es/icon";
 
 const loginUserStore = useLoginUserStore();
 

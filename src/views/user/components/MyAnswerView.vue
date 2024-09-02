@@ -93,7 +93,7 @@ const formSearchParams = ref<API.UserAnswerQueryRequest>({});
 // 初始化搜索条件（不应该被修改）
 const initSearchParams = {
   current: 1,
-  pageSize: 10,
+  pageSize: 5,
 };
 
 const searchParams = ref<API.UserAnswerQueryRequest>({

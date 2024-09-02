@@ -23,3 +23,15 @@ export async function uploadFile(
     ...(options || {}),
   });
 }
+
+/** 用户头像上传 POST /file/upload/user */
+export async function uploadFileUser(body: {}, options?: { [key: string]: any }) {
+  return request<API.BaseResponseString>('/file/upload/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}

@@ -3,11 +3,11 @@
     <a-card>
       <a-tabs position="left" type="card-gutter" size="large">
         <a-tab-pane key="1">
-          <template #title> 基本设置 </template>
+          <template #title> 基本设置</template>
           <UserEditView />
         </a-tab-pane>
         <a-tab-pane key="2">
-          <template #title> 安全设置 </template>
+          <template #title> 安全设置</template>
         </a-tab-pane>
       </a-tabs>
     </a-card>
